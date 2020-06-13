@@ -1,4 +1,4 @@
-type Gif = {
+export type Gif = {
   bitly_url: string;
   id: string;
   images: {

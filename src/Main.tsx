@@ -1,6 +1,7 @@
 import "./Main.css";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "./types";
+import Gif from "./Gif";
 import React from "react";
 import { fetchGifs } from "./actions";
 
@@ -23,21 +24,7 @@ export default function Main() {
           (parseInt(gif.images.fixed_width.height, 10) + GRID_GAP_PX) /
             (GRID_ROW_HEIGHT_PX + GRID_GAP_PX)
         );
-        return (
-          <div
-            className="gif"
-            key={gif.id}
-            style={{ gridRowEnd: `span ${rowSpan}` }}
-          >
-            <img
-              alt=""
-              height={gif.images.fixed_width.height}
-              loading="lazy"
-              src={gif.images.fixed_width.url}
-              width={gif.images.fixed_width.width}
-            />
-          </div>
-        );
+        return <Gif gif={gif} key={gif.id} rowSpan={rowSpan} />;
       })}
     </div>
   );
