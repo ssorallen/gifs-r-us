@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   background-color: black;
@@ -5,4 +9,47 @@ body {
 
 .app {
   padding: 15px;
+}
+
+.navbar {
+  border-bottom: 1px dashed greenyellow;
+  padding: 8px 12px;
+}
+
+.navbar-brand {
+  color: greenyellow;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-weight: bold;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.navbar-brand:hover {
+  animation: rainbow 4s linear infinite;
+  background: repeating-linear-gradient(
+    45deg,
+    violet,
+    indigo,
+    blue,
+    green,
+    yellow,
+    orange,
+    red,
+    violet
+  );
+  background-size: 600% 600%;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 25%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

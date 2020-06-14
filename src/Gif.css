@@ -1,8 +1,8 @@
 .gif-loading {
-  background-color: black;
   animation-name: color;
   animation-duration: 2s;
   animation-iteration-count: infinite;
+  background-color: black;
 }
 
 @keyframes color {

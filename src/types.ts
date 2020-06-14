@@ -17,9 +17,20 @@ export type Gif = {
   url: string;
 };
 
-export type GiphyApiResponse = {
+type GiphyApiMetadata = {
+  msg: string;
+  response_id: string;
+  status: number;
+};
+
+export type GiphyApiGifResponse = {
+  data: Gif;
+  metadata: GiphyApiMetadata;
+};
+
+export type GiphyApiTrendingResponse = {
   data: Array<Gif>;
-  metadata: any;
+  metadata: GiphyApiMetadata;
   pagination: {
     count: number;
     offset: number;
@@ -27,38 +38,81 @@ export type GiphyApiResponse = {
   };
 };
 
-type FetchGifsCanceledAction = {
-  type: "fetch-gifs-cancelled";
+type FetchGifCanceledAction = {
+  type: "fetch-gif-cancelled";
 };
 
-type FetchGifsErrorAction = {
+type FetchGifErrorAction = {
   data: {
     error: Error;
   };
-  type: "fetch-gifs-error";
+  type: "fetch-gif-error";
 };
 
-type FetchGifsStartAction = {
+type FetchGifStartAction = {
   data: {
     controller: AbortController;
   };
-  type: "fetch-gifs-start";
+  type: "fetch-gif-start";
 };
 
-type FetchGifsSucessAction = {
+type FetchGifSucessAction = {
   data: {
-    response: GiphyApiResponse;
+    response: GiphyApiGifResponse;
   };
-  type: "fetch-gifs-success";
+  type: "fetch-gif-success";
+};
+
+type FetchTrendingCanceledAction = {
+  type: "fetch-trending-cancelled";
+};
+
+type FetchTrendingErrorAction = {
+  data: {
+    error: Error;
+  };
+  type: "fetch-trending-error";
+};
+
+type FetchTrendingStartAction = {
+  data: {
+    controller: AbortController;
+  };
+  type: "fetch-trending-start";
+};
+
+type FetchTrendingSucessAction = {
+  data: {
+    response: GiphyApiTrendingResponse;
+  };
+  type: "fetch-trending-success";
 };
 
 export type Action =
-  | FetchGifsCanceledAction
-  | FetchGifsErrorAction
-  | FetchGifsStartAction
-  | FetchGifsSucessAction;
+  | FetchGifCanceledAction
+  | FetchGifErrorAction
+  | FetchGifStartAction
+  | FetchGifSucessAction
+  | FetchTrendingCanceledAction
+  | FetchTrendingErrorAction
+  | FetchTrendingStartAction
+  | FetchTrendingSucessAction;
 
-export type AppState = {
+export type Dispatch = (action: Action) => void;
+
+export type GifState = {
+  fetch: { controller: AbortController } | null;
+  gif: Gif | null;
+};
+
+export type TrendingState = {
   fetch: { controller: AbortController } | null;
   gifs: Array<Gif>;
 };
+
+export type AppState = {
+  gif: GifState;
+  trending: TrendingState;
+};
+
+export type GetState = () => AppState;

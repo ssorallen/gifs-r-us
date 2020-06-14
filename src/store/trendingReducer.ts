@@ -1,32 +1,30 @@
-import { Action, AppState } from "./types";
-import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
+import { Action, TrendingState } from "../types";
 
-const initialState: AppState = {
+const initialState: TrendingState = {
   fetch: null,
   gifs: [],
 };
 
-function rootReducer(state = initialState, action: Action) {
+export default function trendingReducer(state = initialState, action: Action) {
   switch (action.type) {
-    case "fetch-gifs-cancelled":
+    case "fetch-trending-cancelled":
       return {
         ...state,
         fetch: null,
       };
-    case "fetch-gifs-error":
+    case "fetch-trending-error":
       return {
         ...state,
         fetch: null,
       };
-    case "fetch-gifs-start":
+    case "fetch-trending-start":
       return {
         ...state,
         fetch: {
           ...action.data,
         },
       };
-    case "fetch-gifs-success": {
+    case "fetch-trending-success": {
       // Use the `gifs` array as a sparse array so the offset can match the offset on the server
       // without taking up actual memory in the client.
       const nextGifs = state.gifs.slice();
@@ -45,5 +43,3 @@ function rootReducer(state = initialState, action: Action) {
       return state;
   }
 }
-
-export default createStore(rootReducer, applyMiddleware(thunk));
