@@ -3,6 +3,8 @@ import { Action, TrendingState } from "../types";
 const initialState: TrendingState = {
   fetch: null,
   gifs: [],
+  offsetBottom: 0,
+  offsetTop: 0,
 };
 
 export default function trendingReducer(state = initialState, action: Action) {
@@ -37,6 +39,8 @@ export default function trendingReducer(state = initialState, action: Action) {
         ...state,
         fetch: null,
         gifs: nextGifs,
+        offsetBottom:
+          state.offsetBottom + action.data.response.pagination.count,
       };
     }
     default:

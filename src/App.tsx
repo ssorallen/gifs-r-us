@@ -12,7 +12,7 @@ export default function App() {
       <Router>
         <nav className="navbar">
           <Link className="navbar-brand" to="/">
-            giphtastic!
+            Gifs-R-Us
           </Link>
         </nav>
         <div className="app">

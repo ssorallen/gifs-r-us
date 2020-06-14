@@ -1,20 +1,20 @@
 export type Gif = {
   bitly_url: string;
+  create_datetime?: string;
   id: string;
   images: {
+    downsized: { height: string; size: string; url: string; width: string };
     fixed_height: { url: string };
     fixed_height_downsampled: { url: string };
     fixed_height_still: { url: string };
-    fixed_width: {
-      height: string;
-      url: string;
-      width: string;
-    };
+    fixed_width: { height: string; url: string; width: string };
   };
+  import_datetime: string;
   rating: string;
   title: string;
   type: "gif";
   url: string;
+  username: string | null;
 };
 
 type GiphyApiMetadata = {
@@ -108,6 +108,8 @@ export type GifState = {
 export type TrendingState = {
   fetch: { controller: AbortController } | null;
   gifs: Array<Gif>;
+  offsetBottom: number;
+  offsetTop: number;
 };
 
 export type AppState = {

@@ -17,5 +17,18 @@ export default function GifPage() {
     };
   }, [dispatch, id]);
 
-  return <div>{gif == null ? null : <Gif gif={gif} />}</div>;
+  return (
+    <div>
+      {gif == null ? null : (
+        <>
+          <h3>{gif.title}</h3>
+          <p>
+            {gif.username == null ? null : <>@{gif.username} &middot; </>}
+            {gif.import_datetime}
+          </p>
+          <Gif gif={gif} size="downsized" />
+        </>
+      )}
+    </div>
+  );
 }
