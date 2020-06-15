@@ -64,7 +64,7 @@ export default function SearchPage() {
               style={{ gridRowEnd: `span ${rowSpan}` }}
               to={`/gifs/${gif.id}`}
             >
-              <Gif gif={gif} />
+              <Gif fluid={false} gif={gif} />
             </Link>
           );
         })}

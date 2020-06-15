@@ -58,7 +58,7 @@ export default function TrendingPage() {
               style={{ gridRowEnd: `span ${rowSpan}` }}
               to={`/gifs/${gif.slug}`}
             >
-              <Gif gif={gif} />
+              <Gif fluid={false} gif={gif} />
             </Link>
           );
         })}

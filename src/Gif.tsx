@@ -3,11 +3,16 @@ import React from "react";
 import { Gif as TGif } from "./types";
 
 type Props = {
+  fluid?: boolean;
   gif: TGif;
   size?: "downsized" | "fixed_width";
 };
 
-export default function Gif({ gif, size = "fixed_width" }: Props) {
+export default function Gif({
+  fluid = true,
+  gif,
+  size = "fixed_width",
+}: Props) {
   const gifImage = gif.images[size];
   const [imageComplete, setImageComplete] = React.useState(false);
 
@@ -34,10 +39,14 @@ export default function Gif({ gif, size = "fixed_width" }: Props) {
     <div
       className={`gif ${imageComplete ? "" : "gif-loading"}`}
       // Ensure container always has dimensions even when the <img> is not yet rendered.
-      style={{
-        height: `${gifImage.height}px`,
-        width: `${gifImage.width}px`,
-      }}
+      style={
+        fluid
+          ? {}
+          : {
+              height: `${gifImage.height}px`,
+              width: `${gifImage.width}px`,
+            }
+      }
     >
       {imageComplete ? (
         <img
