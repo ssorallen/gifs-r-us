@@ -4,6 +4,10 @@ body {
   color: greenyellow;
 }
 
+.btn-outline-success {
+  border-color: greenyellow;
+}
+
 .grid {
   display: grid;
   grid-gap: 10px;

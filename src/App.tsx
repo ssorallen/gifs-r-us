@@ -14,7 +14,7 @@ export default function App() {
     <Provider store={store}>
       <Router>
         <Navbar />
-        <div className="container-fluid">
+        <div className="container">
           <Switch>
             <Route path="/gifs/:slug">
               <GifPage />
