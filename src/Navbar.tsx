@@ -21,23 +21,27 @@ export default function Navbar() {
           🎉
         </span>
       </Link>
-      <form action="/search" className="form-inline my-2 my-lg-0">
-        <input
-          aria-label="Search all the GIFs"
-          className="form-control mr-sm-2"
-          name="q"
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
-          placeholder="Search all the GIFs"
-          type="search"
-          value={value == null ? "" : value}
-        />
-        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
-          <span aria-label="Search" role="img">
-            🔎
-          </span>
-        </button>
+      <form action="/search" className="form-inline">
+        <div className="input-group">
+          <input
+            aria-label="Search all the GIFs"
+            className="form-control"
+            name="q"
+            onChange={(e) => {
+              setValue(e.target.value);
+            }}
+            placeholder="Search all the GIFs"
+            type="search"
+            value={value == null ? "" : value}
+          />
+          <div className="input-group-append">
+            <button className="btn btn-outline-success" type="submit">
+              <span aria-label="Search" role="img">
+                🔎
+              </span>
+            </button>
+          </div>
+        </div>
       </form>
     </nav>
   );
