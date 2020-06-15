@@ -25,7 +25,7 @@ export default function GifPage() {
     <div className="py-3">
       {gif == null ? null : (
         <>
-          <h3>{gif.title}</h3>
+          {gif.title === "" ? null : <h3>{gif.title}</h3>}
           <p>
             {gif.username === "" ? null : <>@{gif.username} &middot; </>}
             {gif.import_datetime}
