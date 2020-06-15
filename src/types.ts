@@ -11,6 +11,7 @@ export type Gif = {
   };
   import_datetime: string;
   rating: string;
+  slug: string;
   title: string;
   type: "gif";
   url: string;
@@ -23,19 +24,27 @@ type GiphyApiMetadata = {
   status: number;
 };
 
+type GiphyApiPagination = {
+  count: number;
+  offset: number;
+  total_count: number;
+};
+
 export type GiphyApiGifResponse = {
   data: Gif;
-  metadata: GiphyApiMetadata;
+  meta: GiphyApiMetadata;
+};
+
+export type GiphyApiSearchResponse = {
+  data: Array<Gif>;
+  meta: GiphyApiMetadata;
+  pagination: GiphyApiPagination;
 };
 
 export type GiphyApiTrendingResponse = {
   data: Array<Gif>;
-  metadata: GiphyApiMetadata;
-  pagination: {
-    count: number;
-    offset: number;
-    total_count: number;
-  };
+  meta: GiphyApiMetadata;
+  pagination: GiphyApiPagination;
 };
 
 type FetchGifCanceledAction = {
@@ -56,11 +65,36 @@ type FetchGifStartAction = {
   type: "fetch-gif-start";
 };
 
-type FetchGifSucessAction = {
+type FetchGifSuccessAction = {
   data: {
     response: GiphyApiGifResponse;
   };
   type: "fetch-gif-success";
+};
+
+type SearchCanceledAction = {
+  type: "search-cancelled";
+};
+
+type SearchErrorAction = {
+  data: {
+    error: Error;
+  };
+  type: "search-error";
+};
+
+type SearchStartAction = {
+  data: {
+    controller: AbortController;
+  };
+  type: "search-start";
+};
+
+type SearchSuccessAction = {
+  data: {
+    response: GiphyApiSearchResponse;
+  };
+  type: "search-success";
 };
 
 type FetchTrendingCanceledAction = {
@@ -81,7 +115,7 @@ type FetchTrendingStartAction = {
   type: "fetch-trending-start";
 };
 
-type FetchTrendingSucessAction = {
+type FetchTrendingSuccessAction = {
   data: {
     response: GiphyApiTrendingResponse;
   };
@@ -92,11 +126,15 @@ export type Action =
   | FetchGifCanceledAction
   | FetchGifErrorAction
   | FetchGifStartAction
-  | FetchGifSucessAction
+  | FetchGifSuccessAction
+  | SearchCanceledAction
+  | SearchErrorAction
+  | SearchStartAction
+  | SearchSuccessAction
   | FetchTrendingCanceledAction
   | FetchTrendingErrorAction
   | FetchTrendingStartAction
-  | FetchTrendingSucessAction;
+  | FetchTrendingSuccessAction;
 
 export type Dispatch = (action: Action) => void;
 
@@ -112,8 +150,13 @@ export type TrendingState = {
   offsetTop: number;
 };
 
+// TODO: Infinite scrolling endpoints are effectively the same. Should these be combined, reuse some
+// code?
+export type SearchState = TrendingState;
+
 export type AppState = {
   gif: GifState;
+  search: SearchState;
   trending: TrendingState;
 };
 

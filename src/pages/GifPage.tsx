@@ -5,10 +5,14 @@ import Gif from "../Gif";
 import React from "react";
 import { useParams } from "react-router-dom";
 
+const SLUG_REGEXP = /([^-]+)$/;
+
 export default function GifPage() {
-  const { id } = useParams();
+  const { slug } = useParams();
   const dispatch = useDispatch();
   const gif = useSelector((state: AppState) => state.gif.gif);
+  const match = SLUG_REGEXP.exec(slug);
+  const id = match == null ? "" : match[0];
 
   React.useEffect(() => {
     dispatch(fetchGif(id));
@@ -18,12 +22,12 @@ export default function GifPage() {
   }, [dispatch, id]);
 
   return (
-    <div>
+    <div className="py-3">
       {gif == null ? null : (
         <>
           <h3>{gif.title}</h3>
           <p>
-            {gif.username == null ? null : <>@{gif.username} &middot; </>}
+            {gif.username === "" ? null : <>@{gif.username} &middot; </>}
             {gif.import_datetime}
           </p>
           <Gif gif={gif} size="downsized" />

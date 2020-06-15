@@ -1,28 +1,22 @@
-* {
-  box-sizing: border-box;
-}
-
 html,
 body {
   background-color: black;
   color: greenyellow;
 }
 
-.app {
-  padding: 15px;
+.grid {
+  display: grid;
+  grid-gap: 10px;
+  grid-auto-rows: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 
 .navbar {
   border-bottom: 1px dashed greenyellow;
-  padding: 8px 12px;
 }
 
 .navbar-brand {
   color: greenyellow;
-  font-family: "Lucida Console", Monaco, monospace;
-  font-weight: bold;
-  font-size: 24px;
-  text-decoration: none;
 }
 
 .navbar-brand:hover {

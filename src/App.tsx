@@ -1,6 +1,9 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import GifPage from "./pages/GifPage";
+import Navbar from "./Navbar";
+import SearchPage from "./pages/SearchPage";
 import TrendingPage from "./pages/TrendingPage";
 import { Provider } from "react-redux";
 import React from "react";
@@ -10,15 +13,14 @@ export default function App() {
   return (
     <Provider store={store}>
       <Router>
-        <nav className="navbar">
-          <Link className="navbar-brand" to="/">
-            Gifs-R-Us
-          </Link>
-        </nav>
-        <div className="app">
+        <Navbar />
+        <div className="container-fluid">
           <Switch>
-            <Route path="/gifs/:id">
+            <Route path="/gifs/:slug">
               <GifPage />
+            </Route>
+            <Route path="/search">
+              <SearchPage />
             </Route>
             <Route path="/">
               <TrendingPage />

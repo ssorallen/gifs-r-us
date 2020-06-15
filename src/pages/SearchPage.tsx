@@ -3,7 +3,8 @@ import { AppState } from "../types";
 import Gif from "../Gif";
 import { Link } from "react-router-dom";
 import React from "react";
-import { cancelFetchTrending, fetchTrending } from "../store/actions";
+import { cancelSearch, search } from "../store/actions";
+import { useLocation } from "react-router-dom";
 
 // Must match .grid{row-gap, grid-row-height} in Trending.css. Extract to a values sharable in JS?
 const GRID_GAP_PX = 10;
@@ -13,39 +14,44 @@ const GRID_ROW_HEIGHT_PX = 10;
 // another request for trending.
 const SCROLL_BOTTOM_THRESHOLD_PX = 50;
 
-export default function TrendingPage() {
+export default function SearchPage() {
+  const q = new URLSearchParams(useLocation().search).get("q");
   const dispatch = useDispatch();
-  const gifs = useSelector((state: AppState) => state.trending.gifs);
+  const gifs = useSelector((state: AppState) => state.search.gifs);
   const offsetBottom = useSelector(
-    (state: AppState) => state.trending.offsetBottom
+    (state: AppState) => state.search.offsetBottom
   );
 
   React.useEffect(() => {
-    dispatch(fetchTrending({ offset: 0 }));
+    if (q == null) return;
+    dispatch(search({ offset: 0, q }));
     return () => {
-      dispatch(cancelFetchTrending());
+      dispatch(cancelSearch());
     };
-  }, [dispatch]);
+  }, [dispatch, q]);
 
   React.useEffect(() => {
+    if (q == null) return;
     function handleScroll() {
       if (
         document.documentElement.scrollHeight -
           (window.scrollY + document.documentElement.clientHeight) <=
         SCROLL_BOTTOM_THRESHOLD_PX
       ) {
-        dispatch(fetchTrending({ offset: offsetBottom }));
+        // Should the `q == null` check above not narrow the type to `string`?
+        // @ts-ignore
+        dispatch(search({ offset: offsetBottom, q }));
       }
     }
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [dispatch, offsetBottom]);
+  }, [dispatch, offsetBottom, q]);
 
   return (
     <div className="py-3">
-      <h3>Trending</h3>
+      <h3>{q}</h3>
       <div className="grid">
         {gifs.map((gif) => {
           const rowSpan = Math.ceil(
@@ -56,7 +62,7 @@ export default function TrendingPage() {
             <Link
               key={gif.id}
               style={{ gridRowEnd: `span ${rowSpan}` }}
-              to={`/gifs/${gif.slug}`}
+              to={`/gifs/${gif.id}`}
             >
               <Gif gif={gif} />
             </Link>

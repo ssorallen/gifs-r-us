@@ -42,6 +42,7 @@ export default function Gif({ gif, size = "fixed_width" }: Props) {
       {imageComplete ? (
         <img
           alt=""
+          className="img-fluid"
           height={gifImage.height}
           loading="lazy"
           src={gifImage.url}
