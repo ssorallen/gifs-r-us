@@ -2,6 +2,7 @@ import { cancelFetchGif, fetchGif } from "../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../types";
 import Gif from "../Gif";
+import { Helmet } from "react-helmet";
 import React from "react";
 import { useParams } from "react-router-dom";
 
@@ -25,6 +26,7 @@ export default function GifPage() {
     <div className="py-3">
       {gif == null ? null : (
         <>
+          <Helmet title={gif.title === "" ? gif.id : gif.title} />
           {gif.title === "" ? null : <h3>{gif.title}</h3>}
           <p>
             {gif.username === "" ? null : <>@{gif.username} &middot; </>}

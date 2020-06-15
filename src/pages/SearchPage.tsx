@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../types";
 import Gif from "../Gif";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import React from "react";
 import { cancelSearch, search } from "../store/actions";
@@ -61,28 +62,33 @@ export default function SearchPage() {
   }, [dispatch, offsetBottom, q]);
 
   return (
-    <div className="py-3">
-      <h3>
-        {q}{" "}
-        <small className="text-muted">{totalCount.toLocaleString()} GIFs</small>
-      </h3>
-      <div className="grid">
-        {gifs.map((gif) => {
-          const rowSpan = Math.ceil(
-            (parseInt(gif.images.fixed_width.height, 10) + GRID_GAP_PX) /
-              (GRID_ROW_HEIGHT_PX + GRID_GAP_PX)
-          );
-          return (
-            <Link
-              key={gif.id}
-              style={{ gridRowEnd: `span ${rowSpan}` }}
-              to={`/gifs/${gif.id}`}
-            >
-              <Gif fluid={false} gif={gif} />
-            </Link>
-          );
-        })}
+    <>
+      <Helmet title={`${q} GIFs`} />
+      <div className="py-3">
+        <h3>
+          {q}{" "}
+          <small className="text-muted">
+            {totalCount.toLocaleString()} GIFs
+          </small>
+        </h3>
+        <div className="grid">
+          {gifs.map((gif) => {
+            const rowSpan = Math.ceil(
+              (parseInt(gif.images.fixed_width.height, 10) + GRID_GAP_PX) /
+                (GRID_ROW_HEIGHT_PX + GRID_GAP_PX)
+            );
+            return (
+              <Link
+                key={gif.id}
+                style={{ gridRowEnd: `span ${rowSpan}` }}
+                to={`/gifs/${gif.id}`}
+              >
+                <Gif fluid={false} gif={gif} />
+              </Link>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
