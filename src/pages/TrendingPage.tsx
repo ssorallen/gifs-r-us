@@ -37,6 +37,12 @@ export default function TrendingPage() {
         dispatch(fetchTrending({ offset: offsetBottom }));
       }
     }
+
+    // Check the first time whether more GIFs are needed. This ensures screens that are taller than
+    // initial set of GIFs will load more. This works to fill the screen because as `offsetBottom`
+    // changes this `useEffect` will get called again.
+    handleScroll();
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);

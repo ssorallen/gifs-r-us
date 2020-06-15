@@ -21,9 +21,12 @@ export default function SearchPage() {
   const offsetBottom = useSelector(
     (state: AppState) => state.search.offsetBottom
   );
+  const totalCount = useSelector((state: AppState) => state.search.totalCount);
 
   React.useEffect(() => {
+    // No query? Nothing to search for.
     if (q == null) return;
+
     dispatch(search({ offset: 0, q }));
     return () => {
       dispatch(cancelSearch());
@@ -31,7 +34,9 @@ export default function SearchPage() {
   }, [dispatch, q]);
 
   React.useEffect(() => {
+    // No query? Nothing to search for.
     if (q == null) return;
+
     function handleScroll() {
       if (
         document.documentElement.scrollHeight -
@@ -43,6 +48,12 @@ export default function SearchPage() {
         dispatch(search({ offset: offsetBottom, q }));
       }
     }
+
+    // Check the first time whether more GIFs are needed. This ensures screens that are taller than
+    // initial set of GIFs will load more. This works to fill the screen because as `offsetBottom`
+    // changes this `useEffect` will get called again.
+    handleScroll();
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -51,7 +62,10 @@ export default function SearchPage() {
 
   return (
     <div className="py-3">
-      <h3>{q}</h3>
+      <h3>
+        {q}{" "}
+        <small className="text-muted">{totalCount.toLocaleString()} GIFs</small>
+      </h3>
       <div className="grid">
         {gifs.map((gif) => {
           const rowSpan = Math.ceil(

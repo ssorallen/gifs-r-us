@@ -150,9 +150,13 @@ export type TrendingState = {
   offsetTop: number;
 };
 
-// TODO: Infinite scrolling endpoints are effectively the same. Should these be combined, reuse some
-// code?
-export type SearchState = TrendingState;
+export type SearchState = {
+  fetch: { controller: AbortController } | null;
+  gifs: Array<Gif>;
+  offsetBottom: number;
+  offsetTop: number;
+  totalCount: number;
+};
 
 export type AppState = {
   gif: GifState;

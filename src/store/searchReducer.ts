@@ -5,6 +5,7 @@ const initialState: SearchState = {
   gifs: [],
   offsetBottom: 0,
   offsetTop: 0,
+  totalCount: 0,
 };
 
 export default function SearchReducer(state = initialState, action: Action) {
@@ -41,6 +42,7 @@ export default function SearchReducer(state = initialState, action: Action) {
         gifs: nextGifs,
         offsetBottom:
           state.offsetBottom + action.data.response.pagination.count,
+        totalCount: action.data.response.pagination.total_count,
       };
     }
     default:
