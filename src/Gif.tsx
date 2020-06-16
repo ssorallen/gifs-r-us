@@ -53,7 +53,6 @@ export default function Gif({
           alt=""
           className="img-fluid"
           height={gifImage.height}
-          loading="lazy"
           src={gifImage.url}
           title={gif.title}
           width={gifImage.width}
