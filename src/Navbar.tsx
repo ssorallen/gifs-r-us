@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import React from "react";
 import { useLocation } from "react-router-dom";
 
 export default function Navbar() {
+  const history = useHistory();
   const loc = new URLSearchParams(useLocation().search);
   const q = loc.get("q");
   const [value, setValue] = React.useState(q);
@@ -13,6 +14,11 @@ export default function Navbar() {
     setValue(q);
   }, [q]);
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    history.push(`/search?q=${value}`);
+  }
+
   return (
     <nav className="navbar">
       <Link className="navbar-brand" to="/">
@@ -21,7 +27,7 @@ export default function Navbar() {
           🎉
         </span>
       </Link>
-      <form action="/search" className="form-inline">
+      <form action="/search" className="form-inline" onSubmit={handleSubmit}>
         <div className="input-group">
           <input
             aria-label="Search all the GIFs"

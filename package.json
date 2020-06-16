@@ -2,6 +2,7 @@
   "name": "gifs-r-us",
   "version": "1.0.0",
   "private": true,
+  "homepage": "https://ssorallen.github.io/gifs-r-us",
   "repository": {
     "type": "git",
     "url": "https://github.com/ssorallen/gifs-r-us.git"
@@ -20,6 +21,7 @@
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
     "bootstrap": "^4.5.0",
+    "gh-pages": "^3.0.0",
     "prettier": "^2.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -32,6 +34,8 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
+    "predeploy": "yarn build",
+    "deploy": "yarn gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
