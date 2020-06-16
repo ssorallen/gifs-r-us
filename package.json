@@ -1,7 +1,12 @@
 {
-  "name": "giphy-browser",
-  "version": "0.1.0",
+  "name": "gifs-r-us",
+  "version": "1.0.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ssorallen/gifs-r-us.git"
+  },
+  "author": "Ross Allen (https://github.com/ssorallen)",
   "dependencies": {
     "@giphy/js-fetch-api": "^1.5.9",
     "@testing-library/jest-dom": "^4.2.4",
