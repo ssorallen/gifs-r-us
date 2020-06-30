@@ -12,7 +12,7 @@ The app is built using [create-react-app][0] and can be run according to CRA's s
 
 ## Author
 
-Ross Allen \<https://github.com/ssorallen>
+Ross Allen &lt;https://github.com/ssorallen&gt;
 
 ## The grid
 
