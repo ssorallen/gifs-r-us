@@ -38,12 +38,9 @@ LOOP ->
 ## Notes
 
 - Search and Trending pages ended up being quite similar in their data loading, and ideally could be
-  factored into a common hook and potentially a common reducer and set of actions. Because of the
-  time constraint, I focused on getting the functionality working and then would return to pull out
-  shared functionality.
+  factored into a common hook and potentially a common reducer and set of actions.
 - Added Bootstrap to the project with intentions of using more of the CSS but ended up only using
-  the Navbar and the inline form. I'm quite familiar with the CSS, and so in a time constraint it
-  was simple to drop it in and use the classes I needed.
+  the Navbar and the inline form.
 
 ## Resources
 
