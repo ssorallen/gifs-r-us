@@ -1,7 +1,6 @@
 # Gifs-R-Us 🎉
 
-A GIF browser built on [giphy.com's API][1]. I spent just about 8 hours on this project beginning
-with Trending, then a single GIF page, and finally the Search page.
+A GIF browser built on [giphy.com's API][1].
 
 ## Running locally
 
@@ -35,8 +34,6 @@ LOOP ->
 
 - Search and Trending pages ended up being quite similar in their data loading, and ideally could be
   factored into a common hook and potentially a common reducer and set of actions.
-- Added Bootstrap to the project with intentions of using more of the CSS but ended up only using
-  the Navbar and the inline form.
 
 ## Resources
 
