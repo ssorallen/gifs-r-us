@@ -10,10 +10,6 @@ The app is built using [create-react-app][0] and can be run according to CRA's s
 1. `yarn install`
 2. `yarn start`
 
-## Author
-
-Ross Allen &lt;https://github.com/ssorallen&gt;
-
 ## The grid
 
 The grid uses a [CSS Grid][2] layout with columns 200px wide and an automatic number of rows 10px
